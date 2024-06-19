@@ -22,8 +22,10 @@ export const ping = asyncHandler(async(req: Request, res: Response) => {
 })
 
 export const submitForm = asyncHandler(async(req: Request, res: Response) => {
-  const { name, email, phone, github_link, stopwatch_time } = req.body;
-
+  let { name, email, phone, github_link, stopwatch_time } = req.body;
+  if(!stopwatch_time) {
+    stopwatch_time = new Date().toLocaleTimeString();
+  }
   const id = uuidv4();
 
   const newSubmission = {

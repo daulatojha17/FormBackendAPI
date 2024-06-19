@@ -45,7 +45,7 @@ export const submitForm = asyncHandler(async(req: Request, res: Response) => {
 })
 
 export const readForm = (req: Request, res: Response) => {
-  const index = req.params.index;
+  const index = req.query.index;
   if (typeof index !== 'string') {
     throw new ApiError(404, 'Index parameter must be provided');
   }

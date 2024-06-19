@@ -1,10 +1,9 @@
 import {Router} from 'express'
-import { ApiResponse } from '../utils/apiResponse';
+import { ping, readForm, submitForm } from '../controllers/form.controller.ts';
 const router = Router();
 
-router.route('/ping').get((req, res) => {
-    const response = new ApiResponse(200, { message: 'pong' });
-    res.json(response)
-})
+router.route('/ping').get(ping)
+router.route('/read/:index').get(readForm)
+router.route('/submit').post(submitForm)
 
 export default router;

@@ -43,7 +43,7 @@ export const submitForm = asyncHandler(async(req: Request, res: Response) => {
   res.json(new ApiResponse(201, newSubmission, 'Form submitted successfully'));
 })
 
-export const readForm = (req: Request, res: Response) => {
+export const readForm = asyncHandler(async(req: Request, res: Response) => {
   const index = req.query.index;
   if (typeof index !== 'string') {
     throw new ApiError(404, 'Index parameter must be provided');
@@ -63,10 +63,10 @@ export const readForm = (req: Request, res: Response) => {
   const submission = submissions[idx];
   submission.mxInd = submissions.length - 1;
   res.status(200).json(new ApiResponse(200, submission, "Fetched submission successfully"));
-};
+})
 
 
-export const deleteSubmission = (req: Request, res: Response) => {
+export const deleteSubmission = asyncHandler(async(req: Request, res: Response) => {
   const {ind} = req.params;
   const index = parseInt(ind, 10);
   const db = readDbFile();
@@ -78,10 +78,10 @@ export const deleteSubmission = (req: Request, res: Response) => {
   db.splice(Number(index), 1);
   writeDbFile(db);
 
-  res.status(200).json({ message: 'Submission deleted successfully' });
-};
+  res.status(200).json("Fetched submission successfully");
+})
 
-export const editSubmission = (req: Request, res: Response) => {
+export const editSubmission = asyncHandler(async(req: Request, res: Response) => {
   const { ind } = req.params;
   console.log(ind);
   const index = parseInt(ind, 10);
@@ -103,4 +103,4 @@ export const editSubmission = (req: Request, res: Response) => {
   writeDbFile(db);
 
   res.status(200).json({ message: 'Submission updated successfully', submission });
-};
+})

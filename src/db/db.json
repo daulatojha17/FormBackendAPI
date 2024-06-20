@@ -1,18 +1,10 @@
 [
   {
-    "id": "d7f711df-60ad-41f7-a0e7-3b1039c422ec",
-    "name": "daulat",
+    "id": "9814d3cc-e45e-4f2d-9e79-12bd388eb1af",
+    "name": "Daulat Ojha",
     "email": "daulatojha17@gmail.com",
     "phone": "9463848909",
-    "github_link": "github.com/daulatojha17",
-    "stopwatch_time": "1"
-  },
-  {
-    "id": "9afc7b07-907a-4c01-98bd-3c0bf99898db",
-    "name": "daulat1",
-    "email": "daulatojha18@gmail.com",
-    "phone": "9463848900",
-    "github_link": "github.com/daulatojha18",
-    "stopwatch_time": "2"
+    "github_link": "https://github.com/daulatojha17/FormBackendAPI",
+    "stopwatch_time": "11:25:11"
   }
 ]

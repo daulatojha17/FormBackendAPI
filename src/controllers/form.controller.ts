@@ -23,9 +23,6 @@ export const ping = asyncHandler(async(req: Request, res: Response) => {
 
 export const submitForm = asyncHandler(async(req: Request, res: Response) => {
   let { name, email, phone, github_link, stopwatch_time } = req.body;
-  if(!stopwatch_time) {
-    stopwatch_time = new Date().toLocaleTimeString();
-  }
   const id = uuidv4();
 
   const newSubmission = {
@@ -57,7 +54,6 @@ export const readForm = (req: Request, res: Response) => {
   if (isNaN(idx) || idx < 0) {
     throw new ApiError(400, 'Index must be a valid non-negative integer');
   }
-
   const submissions = readDbFile();
 
   if (idx >= submissions.length) {
@@ -65,5 +61,46 @@ export const readForm = (req: Request, res: Response) => {
   }
 
   const submission = submissions[idx];
+  submission.mxInd = submissions.length - 1;
   res.status(200).json(new ApiResponse(200, submission, "Fetched submission successfully"));
+};
+
+
+export const deleteSubmission = (req: Request, res: Response) => {
+  const {ind} = req.params;
+  const index = parseInt(ind, 10);
+  const db = readDbFile();
+
+  if (index < 0 || index >= db.length) {
+      return res.status(404).json({ error: 'Submission not found' });
+  }
+
+  db.splice(Number(index), 1);
+  writeDbFile(db);
+
+  res.status(200).json({ message: 'Submission deleted successfully' });
+};
+
+export const editSubmission = (req: Request, res: Response) => {
+  const { ind } = req.params;
+  console.log(ind);
+  const index = parseInt(ind, 10);
+  const { name, email, phone, github_link, stopwatch_time } = req.body;
+  const db = readDbFile();
+
+  if (index < 0 || index >= db.length) {
+      return res.status(404).json({ error: 'Submission not found' });
+  }
+  console.log(index)
+  const submission = db[index];
+  console.log(submission)
+  submission.name = name || submission.name;
+  submission.email = email || submission.email;
+  submission.phone = phone || submission.phone;
+  submission.github_link = github_link || submission.github_link;
+  submission.stopwatch_time = stopwatch_time || submission.stopwatch_time;
+
+  writeDbFile(db);
+
+  res.status(200).json({ message: 'Submission updated successfully', submission });
 };

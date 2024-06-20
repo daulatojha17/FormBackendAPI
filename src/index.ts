@@ -10,7 +10,7 @@ dotenv.config({
 
 const app = express();
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: (process.env.CORS_ORIGIN || '*'),
     credentials:true,
 
 }))
@@ -20,6 +20,6 @@ app.use(express.urlencoded({extended : true, limit:"16kb"}))
 app.use("", router);
 
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running at http://localhost:${process.env.PORT}`);
+app.listen((process.env.PORT || 3000), () => {
+    console.log(`Server is running at http://localhost:${(process.env.PORT || 3000)}`);
 });

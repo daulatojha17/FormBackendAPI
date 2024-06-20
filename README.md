@@ -56,3 +56,15 @@ This is a TypeScript-based backend server using Express.js to handle form submis
 - **Method:** GET
 - **Description:** Reads a form submission by index (0-indexed).
 - **Example:** `http://localhost:3000/read?index=0`
+
+### Edit Form Submission
+- **Endpoint:** `/edit/:ind`
+- **Method:** PUT
+- **Description:** Edits a form submission by index (0-indexed).
+- **Example:** `http://localhost:3000/edit/0`
+
+### Delete Form Submission
+- **Endpoint:** `/delete/:ind`
+- **Method:** DELETE
+- **Description:** Deletes a form submission by index (0-indexed).
+- **Example:** `http://localhost:3000/delete/0`

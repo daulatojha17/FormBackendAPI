@@ -104,3 +104,15 @@ export const editSubmission = asyncHandler(async(req: Request, res: Response) =>
 
   res.status(200).json({ message: 'Submission updated successfully', submission });
 })
+
+export const searchFormByEmail = (req: Request, res: Response) => {
+  const { email } = req.query;
+  if (!email || typeof email !== 'string') {
+      return res.status(400).json({ error: 'Email parameter is required' });
+  }
+
+  const db = readDbFile();
+  const forms = db.filter((form: any) => form.email === email);
+
+  res.status(200).json(new ApiResponse(200, forms, 'Forms fetched successfully'));
+};

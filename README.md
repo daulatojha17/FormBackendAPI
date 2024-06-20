@@ -68,3 +68,9 @@ This is a TypeScript-based backend server using Express.js to handle form submis
 - **Method:** DELETE
 - **Description:** Deletes a form submission by index (0-indexed).
 - **Example:** `http://localhost:3000/delete/0`
+
+### Search Form Submission by Email
+- **Endpoint:** `/delete?email=sample@gmail.com`
+- **Method:** GET
+- **Description:** Searches a form submission by email.
+- **Example:** `http://localhost:3000/search?email=sample@gmail.com`
